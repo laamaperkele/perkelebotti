@@ -17,7 +17,6 @@ var lataus = function(uri, filename, callback){
 };
 
 var data = "kisu.png";
-var data2 = "kisu.gif";
 
 bot.onText(/^\/kissa$/, function (msg) {
         request('http://thecatapi.com/api/images/get?format=xml&results_per_page=1&type=jpg', function (error, response, body) {
