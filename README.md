@@ -1,2 +1,2 @@
 # koodiBot
-koodiBot is koodiluola.eu admins own little helpful telegram bot. It can post server status and most importantly, cat pictures.
+[koodiBot](https://telegram.me/koodiBot) is helpful telegram bot made for koodiluola.eu admins. It can post server status & cat pictures.
