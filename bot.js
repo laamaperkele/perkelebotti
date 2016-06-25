@@ -1,67 +1,66 @@
 var token = "";
 
-var     Bot = require("node-telegram-bot-api"),
-        bot = new Bot(token, {polling: true}),
-        request = require("request"),
-        parseString = require('xml2js').parseString,
-        fs = require("fs-extra");
+var Bot         = require("node-telegram-bot-api"),
+    bot         = new Bot(token, {polling: true}),
+    request     = require("request"),
+    parseString = require('xml2js').parseString,
+    fs          = require("fs-extra");
 
 
 var lataus = function(uri, filename, callback){
-        request.head(uri, function(err, res, body){
-                console.log("content-type:", res.headers["content-type"]);
-                console.log("content-length:", res.headers["content-length"]);
-
-                request(uri).pipe(fs.createWriteStream(filename)).on("close", callback);
-        });
+    request.head(uri, function(err, res, body){
+        console.log("content-type:", res.headers["content-type"]);
+        console.log("content-length:", res.headers["content-length"]);
+        request(uri).pipe(fs.createWriteStream(filename)).on("close", callback);
+    });
 };
 
 var data = "kisu.png";
 
 bot.onText(/^\/kissa$/, function (msg) {
-        request('http://thecatapi.com/api/images/get?format=xml&results_per_page=1&type=jpg', function (error, response, body) {
-                var xml = body;
-                if (!error && response.statusCode == 200) {
-                        parseString(xml, function (err, result) {
-                                if (err){
-                                    console.log(err);
-                                };
-                                data = result.response.data[0].images[0].image[0].url;
-                                data = data.toString();
-                                lataus(data, "kisu.jpg", function(){
-                                        console.log("lataus onnistui - jpg");
-                                        bot.sendPhoto(chatId, kissa).then(function(){
-                                                console.log("Komento /kissa suoritettu.");
-                                        });
-                                });
-                        });
+    request('http://thecatapi.com/api/images/get?format=xml&results_per_page=1&type=jpg', function (error, response, body) {
+        var xml = body;
+        if (!error && response.statusCode == 200) {
+            parseString(xml, function (err, result) {
+                if (err){
+                    console.log(err);
                 };
-        });
-        var chatId = msg.chat.id;
-        var kissa = "kisu.jpg";
+                data = result.response.data[0].images[0].image[0].url;
+                data = data.toString();
+                lataus(data, "kisu.jpg", function(){
+                    console.log("lataus onnistui - jpg");
+                    bot.sendPhoto(chatId, kissa).then(function(){
+                            console.log("Komento /kissa suoritettu.");
+                    });
+                });
+            });
+        };
+    });
+    var chatId = msg.chat.id;
+    var kissa = "kisu.jpg";
 });
 
 bot.onText(/^\/kissagif$/, function (msg) {
-        request('http://thecatapi.com/api/images/get?format=xml&results_per_page=1&type=gif', function (error, response, body) {
-                var xml = body;
-                if (!error && response.statusCode == 200) {
-                        parseString(xml, function (err, result) {
-                                if (err){
-                                    console.log(err);
-                                };
-                                data = result.response.data[0].images[0].image[0].url;
-                                data = data.toString();
-                                lataus(data, "kisu.gif", function(){
-                                        console.log("lataus onnistui - gif");
-                                        bot.sendDocument(chatId, kissa).then(function(){
-                                                console.log("Komento /kissagif suoritettu.");
-                                        });
-                                });
-                        });
+    request('http://thecatapi.com/api/images/get?format=xml&results_per_page=1&type=gif', function (error, response, body) {
+        var xml = body;
+        if (!error && response.statusCode == 200) {
+            parseString(xml, function (err, result) {
+                if (err){
+                    console.log(err);
                 };
-        });
-        var chatId = msg.chat.id;
-        var kissa = "kisu.gif";
+                data = result.response.data[0].images[0].image[0].url;
+                data = data.toString();
+                lataus(data, "kisu.gif", function(){
+                    console.log("lataus onnistui - gif");
+                    bot.sendDocument(chatId, kissa).then(function(){
+                            console.log("Komento /kissagif suoritettu.");
+                    });
+                });
+            });
+        };
+    });
+    var chatId = msg.chat.id;
+    var kissa = "kisu.gif";
 });
 
 bot.onText(/\/servut$/, function (msg) {
@@ -92,8 +91,8 @@ bot.onText(/\/servut$/, function (msg) {
 });
 
 bot.onText(/\/help$/, function (msg, match) {
-  var chatId = msg.chat.id;
-  bot.sendMessage(chatId, "/kissa\n/kissagif\n/servut");
+    var chatId = msg.chat.id;
+    bot.sendMessage(chatId, "/kissa\n/kissagif\n/servut");
 });
 
 console.log("Botti on tulilla.");
