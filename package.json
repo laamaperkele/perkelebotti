@@ -1,15 +1,16 @@
 {
-  "name": "test",
+  "name": "koodibot",
   "version": "1.0.0",
-  "description": "",
-  "main": "app.js",
+  "description": "koodiBot on koodiluolan ikioma botti.",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Kimmo Tamio / Valkosuklaa",
   "license": "ISC",
   "dependencies": {
     "express": "^4.14.0",
+    "fs": "0.0.2",
     "fs-extra": "^0.30.0",
     "node-telegram-bot-api": "^0.23.3",
     "request": "^2.72.0",
