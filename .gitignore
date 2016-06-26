@@ -36,6 +36,7 @@ jspm_packages
 *.jpg
 *.png
 *.gif
+*.webp
 token.token
 
 # Optional REPL history
