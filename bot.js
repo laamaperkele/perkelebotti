@@ -18,7 +18,7 @@ var lataus = function(uri, filename, callback){
 var data = "kisu.png";
 
 bot.onText(/^\/kissa$/, function (msg) {
-    request('http://thecatapi.com/api/images/get?format=xml&results_per_page=1&type=jpg', function (error, response, body) {
+    request('http://thecatapi.com/api/images/get?format=xml&results_per_page=1&api_key=APIKEY&type=jpg', function (error, response, body) {
         var xml = body;
         if (!error && response.statusCode == 200) {
             parseString(xml, function (err, result) {
@@ -61,6 +61,12 @@ bot.onText(/^\/kissagif$/, function (msg) {
     });
     var chatId = msg.chat.id;
     var kissa = "kisu.gif";
+});
+
+bot.onText(/\/koira$/, function (msg, match) {
+    var chatId = msg.chat.id;
+    var koira = "koira.webp"
+    bot.sendSticker(chatId, koira);
 });
 
 bot.onText(/\/servut$/, function (msg) {
