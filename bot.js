@@ -67,7 +67,7 @@ bot.onText(/\/koira$/, function (msg, match) {
     var chatId = msg.chat.id;
     var koira = "koira.webp"
     bot.sendSticker(chatId, koira);
-    console.log("Komento /koira suoritettu);
+    console.log("Komento /koira suoritettu");
 });
 
 bot.onText(/\/servut$/, function (msg) {
