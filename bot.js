@@ -16,7 +16,6 @@ var lataus = function(uri, filename, callback){
 };
 
 var data = "kisu.png";
-
 bot.onText(/^\/kissa$/, function (msg) {
     request('http://thecatapi.com/api/images/get?format=xml&results_per_page=1&api_key=API&type=jpg', function (error, response, body) {
         var xml = body;
@@ -28,9 +27,10 @@ bot.onText(/^\/kissa$/, function (msg) {
                 data = result.response.data[0].images[0].image[0].url;
                 data = data.toString();
                 lataus(data, "kisu.jpg", function(){
-                    console.log("lataus onnistui - jpg");
+                    console.log("lataus onnistui - jpg"); 
                     bot.sendPhoto(chatId, kissa).then(function(){
-                            console.log("Komento /kissa suoritettu.");
+                        console.log("Komento /kissa suoritettu.");
+		        console.log(chatId);
                     });
                 });
             });
@@ -63,14 +63,14 @@ bot.onText(/^\/kissagif$/, function (msg) {
     var kissa = "kisu.gif";
 });
 
-bot.onText(/\/koira$/, function (msg, match) {
+bot.onText(/\/koira/, function (msg, match) {
     var chatId = msg.chat.id;
     var koira = "koira.webp"
     bot.sendSticker(chatId, koira);
     console.log("Komento /koira suoritettu");
 });
 
-bot.onText(/\/servut$/, function (msg) {
+bot.onText(/\/servut/, function (msg) {
   var chatId = msg.chat.id;
   lataus("http://cache.www.gametracker.com/server_info/77.86.191.54:27032/b_350_20_5A6C3E_383F2D_D2E1B5_2E3226.png", "bhop.png", function(){
       console.log("lataus onnistui - bhop");
@@ -117,7 +117,7 @@ bot.onText(/\/servut$/, function (msg) {
 
 bot.onText(/\/help$/, function (msg, match) {
     var chatId = msg.chat.id;
-    bot.sendMessage(chatId, "/kissa\n/kissagif\n/servut");
+    bot.sendMessage(chatId, "/kissa\n/kissagif\n/koira\n/servut");
 });
 
 console.log("Botti on tulilla.");
