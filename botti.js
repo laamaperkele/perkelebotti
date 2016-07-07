@@ -115,7 +115,7 @@ bot.onText(/\/servut/, function (msg) {
   kuva8 = "mesa2.png";
 });
 
-bot.onText(/\/laama/, function (msg, match) {
+bot.onText(/\/laama/, function (msg) {
     var chatId = msg.chat.id;
     lataus("http://s2.quickmeme.com/img/83/834205cb9d7db6d39f6987830394ec86debac614119a228a4eb5be2dd515da51.jpg", "laama.png", function(){
     console.log("lataus onnistui - laama");
